@@ -102,7 +102,7 @@ spawn(
                 if tostring(c) == "FireServer" then
                     if tostring(d[1]) == "RemoteEvent" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
-                            if SaveSettings["Combat"]["Aimbot_Skill_Around"] then
+                            if SaveSettings["Combat"]["Aimbot_Skill_Around"] and AimbotNearestSelectPosition then
                                 if tostring(typeof(d[2])) == "CFrame" then
                                     d[2] = AimbotNearestSelectPosition
                                 elseif tostring(typeof(d[2])) == "Vector3" then
@@ -133,7 +133,7 @@ spawn(
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if
                                 SaveSettings["Combat"]["FovEnabled"] and
-                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"])
+                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart.Position
                              then
                                 d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.Position
                                 return b(unpack(d))
