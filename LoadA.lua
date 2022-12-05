@@ -204,3 +204,25 @@ spawn(
         )
     end
 )
+local gg = getrawmetatable(game)
+local old = gg.__namecall
+setreadonly(gg,false)
+gg.__namecall = newcclosure(function(...)
+    local method = getnamecallmethod()
+    local args = {...}
+    if tostring(method) == "InvokeServer" then
+        if tostring(args[1]) == "" then
+            if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                if SaveSettings["Combat"]["Aimbot_Skill_Around"] and AimbotNearestSelectPosition then
+                    if tostring(typeof(args[3])) == "CFrame" then
+                        args[3] = AimbotNearestSelectPosition
+                    elseif tostring(typeof(args[3])) == "Vector3" then
+                        args[3] = AimbotNearestSelectPosition.Position
+                    end
+                    return old(unpack(args))
+                end
+            end
+        end
+    end
+    return old(...)
+end)
