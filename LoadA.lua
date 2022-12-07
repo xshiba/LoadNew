@@ -133,9 +133,45 @@ spawn(
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if
                                 SaveSettings["Combat"]["FovEnabled"] and
-                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart.Position
+                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart
                              then
-                                d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.Position
+                                if tostring(typeof(d[2])) == "CFrame" then
+                                    d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.CFrame
+                                elseif tostring(typeof(d[2])) == "Vector3" then
+                                    d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.Position
+                                end
+                                return b(unpack(d))
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
+spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "FireServer" then
+                    if tostring(d[1]) == "RemoteEvent" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if
+                                SaveSettings["Combat"]["FovEnabled"] and
+                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart
+                             then
+                                if tostring(typeof(d[2])) == "CFrame" then
+                                    d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.CFrame
+                                elseif tostring(typeof(d[2])) == "Vector3" then
+                                    d[2] = _G.CharacterAimBot.Character.HumanoidRootPart.Position
+                                end
                                 return b(unpack(d))
                             end
                         end
@@ -204,25 +240,61 @@ spawn(
         )
     end
 )
-local gg = getrawmetatable(game)
-local old = gg.__namecall
-setreadonly(gg,false)
-gg.__namecall = newcclosure(function(...)
-    local method = getnamecallmethod()
-    local args = {...}
-    if tostring(method) == "InvokeServer" then
-        if tostring(args[1]) == "" then
-            if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-                if SaveSettings["Combat"]["Aimbot_Skill_Around"] and AimbotNearestSelectPosition then
-                    if tostring(typeof(args[3])) == "CFrame" then
-                        args[3] = AimbotNearestSelectPosition
-                    elseif tostring(typeof(args[3])) == "Vector3" then
-                        args[3] = AimbotNearestSelectPosition.Position
+spawn(
+    function()
+        local gg = getrawmetatable(game)
+        local old = gg.__namecall
+        setreadonly(gg,false)
+        gg.__namecall = newcclosure(function(...)
+            local method = getnamecallmethod()
+            local args = {...}
+            if tostring(method) == "InvokeServer" then
+                if tostring(args[1]) == "" then
+                    if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                        if SaveSettings["Combat"]["Aimbot_Skill_Around"] and AimbotNearestSelectPosition then
+                            if tostring(typeof(args[3])) == "CFrame" then
+                                args[3] = AimbotNearestSelectPosition
+                            elseif tostring(typeof(args[3])) == "Vector3" then
+                                args[3] = AimbotNearestSelectPosition.Position
+                            end
+                            return old(unpack(args))
+                        end
                     end
-                    return old(unpack(args))
                 end
             end
-        end
+            return old(...)
+        end)
     end
-    return old(...)
-end)
+)
+spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "InvokeServer" then
+                    if tostring(d[1]) == "" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if
+                                SaveSettings["Combat"]["FovEnabled"] and
+                                    (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart
+                             then
+                                if tostring(typeof(d[3])) == "CFrame" then
+                                    d[3] = _G.CharacterAimBot.Character.HumanoidRootPart.CFrame
+                                elseif tostring(typeof(d[3])) == "Vector3" then
+                                    d[3] = _G.CharacterAimBot.Character.HumanoidRootPart.Position
+                                end
+                                return b(unpack(d))
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
