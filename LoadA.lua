@@ -282,7 +282,7 @@ spawn(
                             if
                                 SaveSettings["Combat"]["FovEnabled"] and
                                     (SaveSettings["Combat"]["Aimbot_Gun"] or SaveSettings["Combat"]["Aimbot_Skill"]) and _G.CharacterAimBot.Character.HumanoidRootPart
-                             then
+                            and allowed_aimbot then
                                 if tostring(typeof(d[3])) == "CFrame" then
                                     d[3] = _G.CharacterAimBot.Character.HumanoidRootPart.CFrame
                                 elseif tostring(typeof(d[3])) == "Vector3" then
