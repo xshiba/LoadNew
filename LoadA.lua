@@ -60,6 +60,39 @@ spawn(
         )
     end
 )
+
+spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "FireServer" then
+                    if tostring(d[1]) == "RemoteEvent" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if FindSeabeast then
+                                if SeaBeastPos ~= nil and SaveSettings["Main"]["AutoSeaBeast"] then
+                                    if tostring(typeof(d[2])) == "CFrame" then
+                                        d[2] = SeaBeastPos
+                                    elseif tostring(typeof(d[2])) == "Vector3" then
+                                        d[2] = SeaBeastPos.Position
+                                    end
+                                    return b(unpack(d))
+                                end
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
+
 spawn(
     function()
         local a = getrawmetatable(game)
