@@ -50,6 +50,58 @@ task.spawn(function()
         return old(...)
     end)
 end)
+local mt = getrawmetatable(game)
+setreadonly(mt,false)
+local old = mt.__namecall
+task.spawn(function()
+    mt.__namecall = newcclosure(function(...)
+        local method = getnamecallmethod()
+        local args = {...}
+        if tostring(method) == "FireServer" then
+            if tostring(args[1]) == "RemoteEvent" then
+                if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                    if _G.SaveSettings.AutoFarmPlayer then
+                        if PosCharacter ~= nil then
+                            if tostring(typeof(args[2])) == "CFrame" then
+                                args[2] = PosCharacter
+                            elseif tostring(typeof(args[2])) == "Vector3" then
+                                args[2] = PosCharacter.Position
+                            end
+                            return old(unpack(args))
+                        end
+                    end
+                end
+            end
+        end 
+        return old(...)
+    end)
+end)
+local mt = getrawmetatable(game)
+setreadonly(mt,false)
+local old = mt.__namecall
+task.spawn(function()
+    mt.__namecall = newcclosure(function(...)
+        local method = getnamecallmethod()
+        local args = {...}
+        if tostring(method) == "InvokeServer" then
+            if tostring(args[1]) == "" then
+                if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                    if _G.SaveSettings.AutoFarmPlayer then
+                        if PosCharacter ~= nil then
+                            if tostring(typeof(args[3])) == "CFrame" then
+                                args[3] = PosCharacter
+                            elseif tostring(typeof(args[3])) == "Vector3" then
+                                args[3] = PosCharacter.Position
+                            end
+                            return old(unpack(args))
+                        end
+                    end
+                end
+            end
+        end 
+        return old(...)
+    end)
+end)
 task.spawn(
     function()
         local a = getrawmetatable(game)
