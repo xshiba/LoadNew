@@ -126,7 +126,7 @@ task.spawn(
                     if tostring(d[1]) == "RemoteEvent" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if USEGUN then
-                                if PosMonMasteryGun ~= nil and (_G.SaveSettings.AutoFarmGunMastery or _G.Savesettings.AutoFarmBoneMasteryGun) then
+                                if PosMonMasteryGun ~= nil and (_G.SaveSettings.AutoFarmGunMastery or _G.SaveSettings.AutoFarmBoneMasteryGun) then
                                     if tostring(typeof(d[2])) == "CFrame" then
                                         d[2] = PosMonMasteryGun
                                     elseif tostring(typeof(d[2])) == "Vector3" then
@@ -157,7 +157,7 @@ task.spawn(
                     if tostring(d[1]) == "" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if USEGUN then
-                                if PosMonMasteryGun ~= nil and (_G.SaveSettings.AutoFarmGunMastery or _G.Savesettings.AutoFarmBoneMasteryGun) then
+                                if PosMonMasteryGun ~= nil and (_G.SaveSettings.AutoFarmGunMastery or _G.SaveSettings.AutoFarmBoneMasteryGun) then
                                     if tostring(typeof(d[3])) == "CFrame" then
                                         d[3] = PosMonMasteryGun
                                     elseif tostring(typeof(d[3])) == "Vector3" then
