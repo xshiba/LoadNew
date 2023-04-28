@@ -168,7 +168,7 @@ task.spawn(
                     if tostring(d[1]) == "RemoteEvent" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if UseSkill then
-                                if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits) then
+                                if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
                                     if tostring(typeof(d[2])) == "CFrame" then
                                         d[2] = PosMonMasteryFruit
                                     elseif tostring(typeof(d[2])) == "Vector3" then
@@ -199,7 +199,7 @@ task.spawn(
                     if tostring(d[1]) == "" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if UseSkill then
-                                if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits) then
+                                if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryGun) then
                                     if tostring(typeof(d[3])) == "CFrame" then
                                         d[3] = PosMonMasteryFruit
                                     elseif tostring(typeof(d[3])) == "Vector3" then
