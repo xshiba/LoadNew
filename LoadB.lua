@@ -102,7 +102,7 @@ task.spawn(function()
         return old(...)
     end)
 end)
-local mt = getrawmetatable(game)
+--[[local mt = getrawmetatable(game)
 setreadonly(mt,false)
 local old = mt.__namecall
 task.spawn(function()
@@ -153,7 +153,7 @@ task.spawn(function()
         end 
         return old(...)
     end)
-end)
+end)]]
 task.spawn(
     function()
         local a = getrawmetatable(game)
