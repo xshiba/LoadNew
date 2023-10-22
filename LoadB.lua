@@ -291,6 +291,37 @@ task.spawn(
                 if tostring(c) == "FireServer" then
                     if tostring(d[1]) == "RemoteEvent" then
                         if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if FindShip then
+                                if ShipPos ~= nil and _G.SaveSettings.AutoFarmSeaEvents then
+                                    if tostring(typeof(d[2])) == "CFrame" then
+                                        d[2] = ShipPos
+                                    elseif tostring(typeof(d[2])) == "Vector3" then
+                                        d[2] = ShipPos.Position
+                                    end
+                                    return b(unpack(d))
+                                end
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
+task.spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "FireServer" then
+                    if tostring(d[1]) == "RemoteEvent" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
                             if StartSub then
                                 if SeaBeastPos ~= nil and _G.SaveSettings.AutoFinishTrail then
                                     if tostring(typeof(d[2])) == "CFrame" then
