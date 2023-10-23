@@ -278,6 +278,39 @@ task.spawn(
         )
     end
 )
+
+task.spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "FireServer" then
+                    if tostring(d[1]) == "RemoteEvent" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if SeaEventsEnabled then
+                                if SeaEventsPos ~= nil and _G.SaveSettings.AutoFarmSeaEvents then
+                                    if tostring(typeof(d[2])) == "CFrame" then
+                                        d[2] = SeaEventsPos
+                                    elseif tostring(typeof(d[2])) == "Vector3" then
+                                        d[2] = SeaEventsPos.Position
+                                    end
+                                    return b(unpack(d))
+                                end
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
+
 task.spawn(
     function()
         local a = getrawmetatable(game)
