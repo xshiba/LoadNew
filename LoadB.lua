@@ -310,7 +310,37 @@ task.spawn(
         )
     end
 )
-
+task.spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "InvokeServer" then
+                    if tostring(d[1]) == "" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if SeaEventsEnabled then
+                                if SeaEventsPos ~= nil and _G.SaveSettings.AutoFarmSeaEvents then
+                                    if tostring(typeof(d[3])) == "CFrame" then
+                                        d[3] = SeaEventsPos
+                                    elseif tostring(typeof(d[3])) == "Vector3" then
+                                        d[3] = SeaEventsPos.Position
+                                    end
+                                    return b(unpack(d))
+                                end
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
 task.spawn(
     function()
         local a = getrawmetatable(game)
@@ -330,6 +360,37 @@ task.spawn(
                                         d[2] = ShipPos
                                     elseif tostring(typeof(d[2])) == "Vector3" then
                                         d[2] = ShipPos.Position
+                                    end
+                                    return b(unpack(d))
+                                end
+                            end
+                        end
+                    end
+                end
+                return b(...)
+            end
+        )
+    end
+)
+task.spawn(
+    function()
+        local a = getrawmetatable(game)
+        local b = a.__namecall
+        setreadonly(a, false)
+        a.__namecall =
+            newcclosure(
+            function(...)
+                local c = getnamecallmethod()
+                local d = {...}
+                if tostring(c) == "InvokeServer" then
+                    if tostring(d[1]) == "" then
+                        if tostring(d[2]) ~= "true" and tostring(d[2]) ~= "false" then
+                            if FindShip then
+                                if ShipPos ~= nil and _G.SaveSettings.AutoFarmSeaEvents then
+                                    if tostring(typeof(d[3])) == "CFrame" then
+                                        d[3] = ShipPos
+                                    elseif tostring(typeof(d[3])) == "Vector3" then
+                                        d[3] = ShipPos.Position
                                     end
                                     return b(unpack(d))
                                 end
