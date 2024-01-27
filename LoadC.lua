@@ -4,6 +4,17 @@ local old = mt.__namecall
 mt.__namecall = newcclosure(function(...)
     local method = getnamecallmethod()
     local args = {...}
+    if not (_G.SaveSettings.AimbotSkill) and
+    not (_G.SaveSettings.AutoFarmPlayer) and
+    not (_G.SaveSettings.AutoFarmBounty) and
+    not UseSkill and
+    not USEGUN and
+    not (_G.SaveSettings.AutoFarmSeaEvents) and
+    not (_G.SaveSettings.AutoFarmSeaEvents) and
+    not (_G.SaveSettings.AutoFinishTrail) and
+    not (_G.SaveSettings.AutoFarmSeaBeasts) then
+        return
+    end
     if tostring(method) == "FireServer" then
         if tostring(args[1]) == "RemoteEvent" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
