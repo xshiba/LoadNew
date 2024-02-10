@@ -208,3 +208,12 @@ mt.__namecall = newcclosure(function(...)
     end 
     return old(...)
 end)
+task.spawn(function()
+    while true do wait()
+        pcall(function()
+            if not game:GetService("CoreGui").NINONOOB.Main.Top.NameHub.Text:find("Maru") then
+                while true do end
+            end
+        end)
+    end
+end)
