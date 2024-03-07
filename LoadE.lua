@@ -15,6 +15,9 @@ mt.__namecall = newcclosure(function(...)
     not (_G.SaveSettings.AutoFarmSeaBeasts) then
         return old(unpack(args))
     end
+    if Dontaim then
+        return old(unpack(args))
+    end
     if tostring(method) == "FireServer" then
         if tostring(args[1]) == "RemoteEvent" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
