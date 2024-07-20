@@ -1,3 +1,14 @@
+local HitPart
+task.spawn(function()
+    while true do task.wait()
+        pcall(function()
+            if _G.SaveSettings.AimbotSkill then
+                HitPart = game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart
+            end
+        end)
+    end
+end)
+
 local mt = getrawmetatable(game)
 setreadonly(mt, false)
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
@@ -5,16 +16,16 @@ local UserInputService = game:GetService('UserInputService')
 getgenv().newIndexFunc = mt.__index
 mt.__index = newcclosure(function(self, Index)
     local script = getfenv(2).script
-    if self == Mouse and not checkcaller() and _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim then
+    if self == Mouse and not checkcaller() and _G.SaveSettings.AimbotSkill and HitPart then
         if Index == "Target" or Index == "target" then 
-            return _G.TargetPlayerAim
+            return HitPart
         elseif Index == "Hit" or Index == "hit" then 
             if script.Name == "Soru" then
                 return newIndexFunc(self, Index)
             elseif UserInputService:IsKeyDown(Enum.KeyCode.F) then
                 return newIndexFunc(self, Index)
             end
-            return _G.TargetPlayerAim
+            return HitPart.CFrame
         elseif Index == "X" or Index == "x" then 
             return self.X 
         elseif Index == "Y" or Index == "y" then 
