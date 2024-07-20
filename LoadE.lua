@@ -4,8 +4,7 @@ local old = mt.__namecall
 mt.__namecall = newcclosure(function(...)
     local method = getnamecallmethod()
     local args = {...}
-    if not (_G.SaveSettings.AimbotSkill) and
-    not (_G.SaveSettings.AutoFarmPlayer) and
+    if not (_G.SaveSettings.AutoFarmPlayer) and
     not (_G.SaveSettings.AutoFarmBounty) and
     not UseSkill and
     not USEGUN and
@@ -21,16 +20,6 @@ mt.__namecall = newcclosure(function(...)
     if tostring(method) == "FireServer" then
         if tostring(args[1]) == "RemoteEvent" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-                if _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
-                    if _G.TargetPlayerAim ~= nil then
-                        if tostring(typeof(args[2])) == "CFrame" then
-                            args[2] = _G.TargetPlayerAim
-                        elseif tostring(typeof(args[2])) == "Vector3" then
-                            args[2] = _G.TargetPlayerAim.Position
-                        end
-                        return old(unpack(args))
-                    end
-                end
                 if _G.SaveSettings.AutoFarmPlayer and PosCharacter ~= nil then
                     if PosCharacter ~= nil then
                         if tostring(typeof(args[2])) == "CFrame" then
@@ -210,6 +199,30 @@ mt.__namecall = newcclosure(function(...)
         end
     end 
     return old(...)
+end)
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+getgenv().newIndexFunc = mt.__index
+mt.__index = newcclosure(function(self, Index)
+    local script = getfenv(2).script
+    if self == Mouse and not checkcaller() and _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
+        if Index == "Target" or Index == "target" then 
+            return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart
+        elseif Index == "Hit" or Index == "hit" then 
+            if script.Name == "Soru" then
+                print("Soru")
+                return newIndexFunc(self, Index)
+            end
+            return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart.CFrame
+        elseif Index == "X" or Index == "x" then 
+            return self.X 
+        elseif Index == "Y" or Index == "y" then 
+            return self.Y 
+        elseif Index == "UnitRay" then 
+            return Ray.new(self.Origin, (self.Hit - self.Origin).Unit)
+        end
+    end
+
+    return newIndexFunc(self, Index)
 end)
 task.spawn(function()
     while true do wait()
