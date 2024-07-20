@@ -190,10 +190,15 @@ mt.__namecall = newcclosure(function(...)
     end 
     return old(...)
 end)
+local mt = getrawmetatable(game)
+setreadonly(mt,false)
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 getgenv().newIndexFunc = mt.__index
 mt.__index = newcclosure(function(self, Index)
     local script = getfenv(2).script
+    if not _G.SaveSettings.AimbotSkill or _G.TargetPlayerAim == nil then
+        return newIndexFunc(self, Index)
+    end
     if self == Mouse and not checkcaller() and _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
         if Index == "Target" or Index == "target" then 
             return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart
@@ -202,10 +207,7 @@ mt.__index = newcclosure(function(self, Index)
                 print("Soru")
                 return newIndexFunc(self, Index)
             end
-            if not _G.SaveSettings.AimbotSkill or _G.TargetPlayerAim == nil then
-                return newIndexFunc(self, Index)
-            end
-            return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart.CFrame
+            return _G.TargetPlayerAim
         elseif Index == "X" or Index == "x" then 
             return self.X 
         elseif Index == "Y" or Index == "y" then 
@@ -216,13 +218,4 @@ mt.__index = newcclosure(function(self, Index)
     end
 
     return newIndexFunc(self, Index)
-end)
-task.spawn(function()
-    while true do wait()
-        pcall(function()
-            if not game:GetService("CoreGui").NINONOOB.Main.Top.NameHub.Text:find("Maru") then
-                while true do end
-            end
-        end)
-    end
 end)
