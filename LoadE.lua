@@ -1,6 +1,7 @@
 local mt = getrawmetatable(game)
 setreadonly(mt, false)
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local UserInputService = game:GetService('UserInputService')
 getgenv().newIndexFunc = mt.__index
 mt.__index = newcclosure(function(self, Index)
     local script = getfenv(2).script
