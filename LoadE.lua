@@ -212,6 +212,9 @@ mt.__index = newcclosure(function(self, Index)
                 print("Soru")
                 return newIndexFunc(self, Index)
             end
+            if not _G.SaveSettings.AimbotSkill then
+                return newIndexFunc(self, Index)
+            end
             return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart.CFrame
         elseif Index == "X" or Index == "x" then 
             return self.X 
