@@ -1,6 +1,6 @@
 local mt = getrawmetatable(game)
 setreadonly(mt, false)
-
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 getgenv().newIndexFunc = mt.__index
 mt.__index = newcclosure(function(self, Index)
     local script = getfenv(2).script
