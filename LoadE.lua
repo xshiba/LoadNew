@@ -1,50 +1,11 @@
-local HitPart
-task.spawn(function()
-    while true do task.wait()
-        pcall(function()
-            if _G.SaveSettings.AimbotSkill then
-                HitPart = game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart
-            end
-        end)
-    end
-end)
-
-local mt = getrawmetatable(game)
-setreadonly(mt, false)
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local UserInputService = game:GetService('UserInputService')
-getgenv().newIndexFunc = mt.__index
-mt.__index = newcclosure(function(self, Index)
-    local script = getfenv(2).script
-    if self == Mouse and not checkcaller() and _G.SaveSettings.AimbotSkill and HitPart then
-        if Index == "Target" or Index == "target" then 
-            return HitPart
-        elseif Index == "Hit" or Index == "hit" then 
-            if script.Name == "Soru" then
-                return newIndexFunc(self, Index)
-            elseif UserInputService:IsKeyDown(Enum.KeyCode.F) then
-                return newIndexFunc(self, Index)
-            end
-            return HitPart.CFrame
-        elseif Index == "X" or Index == "x" then 
-            return self.X 
-        elseif Index == "Y" or Index == "y" then 
-            return self.Y 
-        elseif Index == "UnitRay" then 
-            return Ray.new(self.Origin, (self.Hit - self.Origin).Unit)
-        end
-    end
-
-    return newIndexFunc(self, Index)
-end)
-
 local mt = getrawmetatable(game)
 setreadonly(mt,false)
 local old = mt.__namecall
 mt.__namecall = newcclosure(function(...)
     local method = getnamecallmethod()
     local args = {...}
-    if not (_G.SaveSettings.AutoFarmPlayer) and
+    if not (_G.SaveSettings.AimbotSkill) and
+    not (_G.SaveSettings.AutoFarmPlayer) and
     not (_G.SaveSettings.AutoFarmBounty) and
     not UseSkill and
     not USEGUN and
@@ -60,6 +21,16 @@ mt.__namecall = newcclosure(function(...)
     if tostring(method) == "FireServer" then
         if tostring(args[1]) == "RemoteEvent" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                if _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
+                    if _G.TargetPlayerAim ~= nil then
+                        if tostring(typeof(args[2])) == "CFrame" then
+                            args[2] = _G.TargetPlayerAim
+                        elseif tostring(typeof(args[2])) == "Vector3" then
+                            args[2] = _G.TargetPlayerAim.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
                 if _G.SaveSettings.AutoFarmPlayer and PosCharacter ~= nil then
                     if PosCharacter ~= nil then
                         if tostring(typeof(args[2])) == "CFrame" then
@@ -145,6 +116,16 @@ mt.__namecall = newcclosure(function(...)
     elseif tostring(method) == "InvokeServer" then
         if tostring(args[1]) == "" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                if _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
+                    if _G.TargetPlayerAim ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = _G.TargetPlayerAim
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = _G.TargetPlayerAim.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
                 if _G.SaveSettings.AutoFarmPlayer and PosCharacter ~= nil then
                     if PosCharacter ~= nil then
                         if tostring(typeof(args[3])) == "CFrame" then
@@ -229,4 +210,13 @@ mt.__namecall = newcclosure(function(...)
         end
     end 
     return old(...)
+end)
+task.spawn(function()
+    while true do wait()
+        pcall(function()
+            if not game:GetService("CoreGui").NINONOOB.Main.Top.NameHub.Text:find("Maru") then
+                while true do end
+            end
+        end)
+    end
 end)
