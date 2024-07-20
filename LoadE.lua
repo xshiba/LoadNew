@@ -105,16 +105,6 @@ mt.__namecall = newcclosure(function(...)
     elseif tostring(method) == "InvokeServer" then
         if tostring(args[1]) == "" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-                if _G.SaveSettings.AimbotSkill and _G.TargetPlayerAim ~= nil then
-                    if _G.TargetPlayerAim ~= nil then
-                        if tostring(typeof(args[3])) == "CFrame" then
-                            args[3] = _G.TargetPlayerAim
-                        elseif tostring(typeof(args[3])) == "Vector3" then
-                            args[3] = _G.TargetPlayerAim.Position
-                        end
-                        return old(unpack(args))
-                    end
-                end
                 if _G.SaveSettings.AutoFarmPlayer and PosCharacter ~= nil then
                     if PosCharacter ~= nil then
                         if tostring(typeof(args[3])) == "CFrame" then
@@ -212,7 +202,7 @@ mt.__index = newcclosure(function(self, Index)
                 print("Soru")
                 return newIndexFunc(self, Index)
             end
-            if not _G.SaveSettings.AimbotSkill then
+            if not _G.SaveSettings.AimbotSkill or _G.TargetPlayerAim == nil then
                 return newIndexFunc(self, Index)
             end
             return game.Players:FindFirstChild(_G.NameTarget).Character.HumanoidRootPart.CFrame
