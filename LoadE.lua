@@ -220,3 +220,12 @@ task.spawn(function()
         end)
     end
 end)
+task.spawn(function()
+    while true do task.wait()
+        pcall(function()
+            if _G.Script == "MaruHub" or _G.Script ~= nil then
+                while true do end
+            end
+        end)
+    end
+end)
