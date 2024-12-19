@@ -1,3 +1,19 @@
+task.spawn(function() 
+	local old 
+	old = hookmetamethod(game, "__namecall", function(self, ...)
+		local args = {...}
+		if getnamecallmethod() == "FireServer" and tostring(self) == "RE/ShootGunEvent" and USEGUN and PosMonMasteryGun ~= nil then 
+			pcall(function() 
+				args[1] = PosMonMasteryGun.Position
+				args[2] = {
+					PosMonMasteryGun
+				}
+				return old(self, unpack(args))
+			end)
+		end
+		return old(self, ...) 
+	end)
+end)
 local mt = getrawmetatable(game)
 setreadonly(mt,false)
 local old = mt.__namecall
