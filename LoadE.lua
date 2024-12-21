@@ -26,7 +26,6 @@ mt.__namecall = newcclosure(function(...)
     not UseSkill and
     not USEGUN and
     not (_G.SaveSettings.AutoFarmSeaEvents) and
-    not (_G.SaveSettings.AutoFarmSeaEvents) and
     not (_G.SaveSettings.AutoFinishTrail) and
     not (_G.SaveSettings.AutoFarmSeaBeasts) then
         return old(unpack(args))
@@ -68,7 +67,7 @@ mt.__namecall = newcclosure(function(...)
                     end
                 end
                 if UseSkill then
-                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
+                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoRelicEvents or _G.SaveSettings.AutoDragonHunter or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
                         if tostring(typeof(args[2])) == "CFrame" then
                             args[2] = PosMonMasteryFruit
                         elseif tostring(typeof(args[2])) == "Vector3" then
