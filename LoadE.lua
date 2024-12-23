@@ -2,12 +2,19 @@ task.spawn(function()
 	local old 
 	old = hookmetamethod(game, "__namecall", function(self, ...)
 		local args = {...}
-		if getnamecallmethod() == "FireServer" and tostring(self) == "RE/ShootGunEvent" and USEGUN and PosMonMasteryGun ~= nil then 
-			pcall(function() 
-				args[1] = PosMonMasteryGun.Position
-				args[2] = {
-					PosMonMasteryGun
-				}
+		if getnamecallmethod() == "FireServer" and tostring(self) == "RE/ShootGunEvent" and ((USEGUN and PosMonMasteryGun ~= nil) or (_G.SaveSettings.AutoShoot and _G.MonsterTarget ~= nil)) then 
+			pcall(function()
+				if (USEGUN and PosMonMasteryGun ~= nil) then
+					args[1] = PosMonMasteryGun.Position
+					args[2] = {
+						PosMonMasteryGun
+					}
+				elseif (_G.SaveSettings.AutoShoot and _G.MonsterTarget ~= nil) then
+					args[1] = _G.MonsterTarget.Position
+					args[2] = {
+						_G.MonsterTarget
+					}
+				end
 				return old(self, unpack(args))
 			end)
 		end
