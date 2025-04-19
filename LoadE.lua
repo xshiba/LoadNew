@@ -51,7 +51,7 @@ mt.__namecall = newcclosure(function(...)
                     end
                 end
                 if UseSkill then
-                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoRelicEvents or _G.SaveSettings.AutoDragonHunter or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
+                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoTyrant or _G.SaveSettings.AutoRelicEvents or _G.SaveSettings.AutoDragonHunter or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
                         if tostring(typeof(args[2])) == "CFrame" then
                             args[2] = PosMonMasteryFruit
                         elseif tostring(typeof(args[2])) == "Vector3" then
@@ -146,7 +146,7 @@ mt.__namecall = newcclosure(function(...)
                     end
                 end
                 if UseSkill then
-                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryGun) then
+                    if PosMonMasteryFruit ~= nil and (_G.SaveSettings.AutoFarmFruitsMastery or _G.SaveSettings.AutoTyrant or _G.SaveSettings.AutoRelicEvents or _G.SaveSettings.AutoDragonHunter or _G.SaveSettings.AutoFarmBoneMasteryFruits or _G.SaveSettings.AutoFarmCakePiratesMasteryFruits) then
                         if tostring(typeof(args[3])) == "CFrame" then
                             args[3] = PosMonMasteryFruit
                         elseif tostring(typeof(args[3])) == "Vector3" then
@@ -210,13 +210,3 @@ mt.__namecall = newcclosure(function(...)
     end 
     return old(...)
 end)
-task.spawn(function()
-    while true do wait()
-        pcall(function()
-            if not game:GetService("CoreGui").NINONOOB.Main.Top.NameHub.Text:find("Maru") then
-                while true do end
-            end
-        end)
-    end
-end)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xshiba/APIGET/main/GET.lua"))()
