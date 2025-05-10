@@ -10,7 +10,7 @@ mt.__namecall = newcclosure(function(...)
     if tostring(method) == "FireServer" then
         if tostring(args[1]) == "RemoteEvent" then
             if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-               if StartSub then
+                if StartSub then
                     if SeaBeastPos ~= nil then
                         if tostring(typeof(args[2])) == "CFrame" then
                             args[2] = SeaBeastPos
@@ -20,17 +20,57 @@ mt.__namecall = newcclosure(function(...)
                         return old(unpack(args))
                     end
                 end
-            end
-        end
-    elseif tostring(method) == "InvokeServer" then
-        if tostring(args[1]) == "" then
-            if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
-               if StartSub then
+                if FindSeabeast then
                     if SeaBeastPos ~= nil then
                         if tostring(typeof(args[3])) == "CFrame" then
                             args[3] = SeaBeastPos
                         elseif tostring(typeof(args[3])) == "Vector3" then
                             args[3] = SeaBeastPos.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
+                if FindPly then
+                    if PosPly ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = PosPly
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = PosPly.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
+            end
+        end
+    elseif tostring(method) == "InvokeServer" then
+        if tostring(args[1]) == "" then
+            if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                if StartSub then
+                    if SeaBeastPos ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = SeaBeastPos
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = SeaBeastPos.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
+                if FindSeabeast then
+                    if SeaBeastPos ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = SeaBeastPos
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = SeaBeastPos.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
+                if FindPly then
+                    if PosPly ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = PosPly
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = PosPly.Position
                         end
                         return old(unpack(args))
                     end
