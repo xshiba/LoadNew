@@ -40,6 +40,16 @@ mt.__namecall = newcclosure(function(...)
                         return old(unpack(args))
                     end
                 end
+                 if BreakJar then
+                    if PosMonMasteryFruit ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = PosMonMasteryFruit
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = PosMonMasteryFruit.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
             end
         end
     elseif tostring(method) == "InvokeServer" then
@@ -71,6 +81,16 @@ mt.__namecall = newcclosure(function(...)
                             args[3] = PosPly
                         elseif tostring(typeof(args[3])) == "Vector3" then
                             args[3] = PosPly.Position
+                        end
+                        return old(unpack(args))
+                    end
+                end
+                 if BreakJar then
+                    if PosMonMasteryFruit ~= nil then
+                        if tostring(typeof(args[3])) == "CFrame" then
+                            args[3] = PosMonMasteryFruit
+                        elseif tostring(typeof(args[3])) == "Vector3" then
+                            args[3] = PosMonMasteryFruit.Position
                         end
                         return old(unpack(args))
                     end
